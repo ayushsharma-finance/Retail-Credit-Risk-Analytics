@@ -23,3 +23,33 @@ Notes
 • No customer information stored
 • Workflow inspired by internship observations
 • Sensitive banking information generalized
+# Version 1.1.0
+
+**Date:** 12 July 2026
+
+## Added
+
+- SQL Server 2025 installed
+- SQL Server Management Studio installed
+- ProjectSHIELD database created
+- Customers table created
+- Loan_Products table created
+- Branches table created
+- SQL folder structure initialized
+
+## Learning Progress
+
+- Understood CREATE DATABASE
+- Learned CREATE TABLE
+- Learned PRIMARY KEY
+- Learned NOT NULL
+- Learned UNIQUE
+- Learned DEFAULT
+- Learned GETDATE()
+
+## Next Milestone
+
+- Employees Table
+- Loan Applications
+- Foreign Keys
+- Table Relationships
