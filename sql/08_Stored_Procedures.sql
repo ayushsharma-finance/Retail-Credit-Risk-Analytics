@@ -1,3 +1,6 @@
+USE ProjectSHIELD;
+GO
+
 /*==============================================================
 Project        : ProjectSHIELD
 Module         : Stored Procedures
@@ -9,11 +12,12 @@ Description    : Stored Procedures for loan processing,
 Created On     : July 2026
 ==============================================================*/
 
+
 /*==============================================================
 Procedure Name : sp_SearchLoanByID
 Purpose        : Retrieve complete loan details using Loan ID.
 Used By        : Loan Officers, Credit Managers
-===============================================================*/
+==============================================================*/
 
 CREATE PROCEDURE sp_SearchLoanByID
     @LoanID VARCHAR(20)
@@ -21,11 +25,12 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    SELECT * 
+    SELECT *
     FROM Loan_Applications
     WHERE Loan_ID = @LoanID;
-End;
+END;
 GO
+
 
 /*==============================================================
 Procedure Name : sp_SearchCustomer
@@ -44,6 +49,7 @@ BEGIN
     WHERE Customer_ID = @CustomerID;
 END;
 GO
+
 
 /*==============================================================
 Procedure Name : sp_GetBranchPerformance
@@ -67,6 +73,7 @@ BEGIN
 END;
 GO
 
+
 /*==============================================================
 Procedure Name : sp_GetEmployeePerformance
 Purpose        : Generate employee-wise loan performance summary.
@@ -82,18 +89,19 @@ BEGIN
         Employee_ID,
 
         COUNT(*) AS Total_Applications,
-        
-        SUM(CASE 
-                WHEN Approval_Status = 'Approved' 
-                THEN 1 
-                ELSE 0 
+
+        SUM(CASE
+                WHEN Approval_Status = 'Approved'
+                THEN 1
+                ELSE 0
             END) AS Approved_Loans,
-        SUM(CASE 
+
+        SUM(CASE
                 WHEN Approval_Status = 'Rejected'
-                THEN 1 
-                ELSE 0 
+                THEN 1
+                ELSE 0
             END) AS Rejected_Loans,
-        
+
         SUM(Loan_Amount) AS Total_Loan_Amount,
 
         AVG(Loan_Amount) AS Average_Loan_Amount
@@ -103,12 +111,16 @@ BEGIN
     GROUP BY Employee_ID
 
     ORDER BY Total_Applications DESC;
-
 END;
 GO
 
-USE ProjectSHIELD;
-GO
+
+/*==============================================================
+Procedure Name : sp_GetRiskClassification
+Purpose        : Classify loan applications into Low, Medium,
+                 and High Risk categories.
+Used By        : Credit Managers, Risk Officers, Power BI
+==============================================================*/
 
 CREATE PROCEDURE sp_GetRiskClassification
 AS
@@ -150,9 +162,9 @@ BEGIN
         CIBIL_Score ASC,
         FOIR DESC,
         LTV DESC;
-
 END;
 GO
+
 
 /*==============================================================
 Procedure Name : sp_GetHighRiskLoans
